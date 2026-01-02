@@ -9,7 +9,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom CSS -->
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=3">
 </head>
 
 <body>
@@ -41,7 +41,6 @@
 
   <!-- PHASE TABS -->
   <ul class="nav nav-pills phase-tabs mb-3 justify-content-center" role="tablist" id="phaseTabs"></ul>
-
   <div class="tab-content" id="phaseContent"></div>
 
   <footer>
@@ -53,7 +52,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 /* ==========================
-   DATA MODEL
+   PROGRAM DATA
 ========================== */
 const program = {
   "Phase 1": {
@@ -101,16 +100,12 @@ const program = {
 };
 
 /* ==========================
-   UTILITY FUNCTIONS
+   UTILITY
 ========================== */
 
-// Format today's date
+// Format today’s date
 const today = new Date();
-const formattedDate = 
-  String(today.getMonth()+1).padStart(2,'0') + '/' +
-  String(today.getDate()).padStart(2,'0') + '/' +
-  String(today.getFullYear()).slice(-2);
-
+const formattedDate = `${String(today.getMonth()+1).padStart(2,'0')}/${String(today.getDate()).padStart(2,'0')}/${String(today.getFullYear()).slice(-2)}`;
 document.getElementById('todayTitle').innerText = `Today’s Workout — ${formattedDate}`;
 
 // Persist user selection
@@ -124,18 +119,19 @@ userSelect.addEventListener('change', () => {
    RENDER FUNCTIONS
 ========================== */
 
-// Render today's lifts dynamically
+// Render today's lifts
 function renderToday() {
   const todayLiftsDiv = document.getElementById('todayLifts');
   todayLiftsDiv.innerHTML = '';
   const phaseKeys = Object.keys(program);
-  const firstPhase = program[phaseKeys[0]]; // simple logic for demo
+  const firstPhase = program[phaseKeys[0]];
   const firstDayName = Object.keys(firstPhase.days)[0];
   const lifts = firstPhase.days[firstDayName];
 
   lifts.forEach((lift, i) => {
     const liftId = `lift-${i}`;
     const checked = JSON.parse(localStorage.getItem(liftId)) || false;
+
     const row = document.createElement('div');
     row.className = 'lift-row';
     if (checked) row.classList.add('completed');
@@ -145,6 +141,7 @@ function renderToday() {
       <span>${lift.name} ${lift.sets}</span>
       <input type="number" class="form-control form-control-sm" placeholder="lbs">
     `;
+
     todayLiftsDiv.appendChild(row);
 
     // Checkbox persistence
@@ -155,7 +152,7 @@ function renderToday() {
     });
   });
 
-  // StairClimber checkbox
+  // StairClimber
   const stairCheckbox = document.getElementById('stairCheckbox');
   stairCheckbox.checked = JSON.parse(localStorage.getItem('stairCheckbox')) || false;
   stairCheckbox.addEventListener('change', () => {
@@ -174,9 +171,7 @@ function renderPhases() {
     // Tab
     const li = document.createElement('li');
     li.className = 'nav-item';
-    li.innerHTML = `
-      <button class="nav-link ${index===0?'active':''}" data-bs-toggle="pill" data-bs-target="#${phaseKey}">${phaseData.name}</button>
-    `;
+    li.innerHTML = `<button class="nav-link ${index===0?'active':''}" data-bs-toggle="pill" data-bs-target="#${phaseKey}">${phaseData.name}</button>`;
     tabs.appendChild(li);
 
     // Content
@@ -187,8 +182,8 @@ function renderPhases() {
     Object.entries(phaseData.days).forEach(([dayName, lifts]) => {
       const card = document.createElement('div');
       card.className = 'card p-3';
-      const liftList = lifts.map(l => `${l.name} ${l.sets}`).join('<br>');
-      card.innerHTML = `<p class="fw-semibold">${dayName}</p><p>${liftList}</p>`;
+      const liftList = lifts.map(l => `<span>${l.name} ${l.sets}</span>`).join('');
+      card.innerHTML = `<p class="fw-semibold">${dayName}</p>${liftList}`;
       div.appendChild(card);
     });
 
@@ -196,10 +191,9 @@ function renderPhases() {
   });
 }
 
-// INITIAL RENDER
+// Initial render
 renderToday();
 renderPhases();
-
 </script>
 </body>
 </html>
