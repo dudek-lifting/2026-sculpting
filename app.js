@@ -1,3 +1,6 @@
+/* ==========================
+   PROGRAM DATA
+========================== */
 const program = {
   "Phase 1": {
     name: "Weeks 1–3",
@@ -14,10 +17,62 @@ const program = {
       ]
     }
   },
-  "Phase 2": { name: "Weeks 4–6", days: { /* ... */ } },
-  "Phase 3": { name: "Weeks 7–9", days: { /* ... */ } },
-  "Phase 4": { name: "Weeks 10–12", days: { /* ... */ } }
+  "Phase 2": {
+    name: "Weeks 4–6",
+    days: {
+      "Day 1 — Lower Intensity": [
+        { name: "Back Squat", sets: "5×5" },
+        { name: "RDL", sets: "4×8" }
+      ],
+      "Day 2 — Upper Push Intensity": [
+        { name: "Bench Press", sets: "5×5" },
+        { name: "Incline DB Press", sets: "4×8" },
+        { name: "Triceps Superset", sets: "3×10" }
+      ]
+    }
+  },
+  "Phase 3": {
+    name: "Weeks 7–9",
+    days: {
+      "Day 1 — Strength Peak": [
+        { name: "Back Squat", sets: "3–5 reps" },
+        { name: "Bench Press", sets: "3–5 reps" }
+      ],
+      "Day 2 — Upper/Accessory": [
+        { name: "Pull-Ups", sets: "3×6–10" },
+        { name: "DB Rows", sets: "3×8–12" }
+      ]
+    }
+  },
+  "Phase 4": {
+    name: "Weeks 10–12",
+    days: {
+      "Day 1 — Final Sculpt": [
+        { name: "Circuit A", sets: "3×15" },
+        { name: "Metabolic Finisher", sets: "AMRAP 10 min" }
+      ],
+      "Day 2 — Upper Sculpt": [
+        { name: "Push-Ups", sets: "3×20" },
+        { name: "DB Shoulder Press", sets: "3×12" }
+      ]
+    }
+  }
 };
+
+/* ==========================
+   HELPER FUNCTIONS
+========================== */
+
+// Convert weekday (0=Sun → 6=Sat) to day in phase
+function getTodayDayName(phaseData) {
+  const dayNames = Object.keys(phaseData.days);
+  const todayIndex = (new Date().getDay() + 6) % 7; // Monday = 0
+  return dayNames[todayIndex % dayNames.length] || dayNames[0];
+}
+
+/* ==========================
+   RENDER PHASE TABS & CARDS
+========================== */
 function renderPhases() {
   const tabs = document.getElementById('phaseTabs');
   const content = document.getElementById('phaseContent');
@@ -25,21 +80,22 @@ function renderPhases() {
   Object.entries(program).forEach(([phaseKey, phaseData], index) => {
     const phaseId = phaseKey.replace(/\s+/g, '_');
 
-    // Create tab button
+    // Tab button
     const li = document.createElement('li');
     li.className = 'nav-item';
     li.innerHTML = `
-      <button class="nav-link ${index === 0 ? 'active' : ''}"
-              data-bs-toggle="pill"
-              data-bs-target="#${phaseId}"
+      <button class="nav-link ${index===0?'active':''}" 
+              data-bs-toggle="pill" 
+              data-bs-target="#${phaseId}" 
               type="button">
         ${phaseData.name}
-      </button>`;
+      </button>
+    `;
     tabs.appendChild(li);
 
-    // Create tab-pane content
+    // Tab content
     const div = document.createElement('div');
-    div.className = `tab-pane fade ${index === 0 ? 'show active' : ''}`;
+    div.className = `tab-pane fade ${index===0?'show active':''}`;
     div.id = phaseId;
 
     Object.entries(phaseData.days).forEach(([dayName, lifts]) => {
@@ -54,21 +110,24 @@ function renderPhases() {
     content.appendChild(div);
   });
 }
+
+/* ==========================
+   RENDER TODAY’S WORKOUT
+========================== */
 function renderToday() {
   const activeTab = document.querySelector('.phase-tabs .nav-link.active');
   const phaseName = activeTab.innerText;
-
   const phaseKey = Object.keys(program).find(k => program[k].name === phaseName);
   const phaseData = program[phaseKey];
 
-  const firstDayName = Object.keys(phaseData.days)[0];
-  const lifts = phaseData.days[firstDayName];
+  const todayDayName = getTodayDayName(phaseData);
+  const lifts = phaseData.days[todayDayName];
 
   const todayLiftsDiv = document.getElementById('todayLifts');
   todayLiftsDiv.innerHTML = '';
 
   lifts.forEach((lift, i) => {
-    const liftId = `lift-${phaseKey}-${firstDayName}-${i}`;
+    const liftId = `lift-${phaseKey}-${todayDayName}-${i}`;
     const checked = JSON.parse(localStorage.getItem(liftId)) || false;
 
     const row = document.createElement('div');
@@ -76,14 +135,13 @@ function renderToday() {
     if (checked) row.classList.add('completed');
 
     row.innerHTML = `
-      <input type="checkbox" id="${liftId}" ${checked ? 'checked' : ''} aria-label="${lift.name} complete">
+      <input type="checkbox" id="${liftId}" ${checked?'checked':''} aria-label="${lift.name} complete">
       <span>${lift.name} ${lift.sets}</span>
       <input type="number" class="form-control form-control-sm" placeholder="lbs">
     `;
 
     todayLiftsDiv.appendChild(row);
 
-    // Persist checkbox state
     row.querySelector('input[type="checkbox"]').addEventListener('change', e => {
       row.classList.toggle('completed', e.target.checked);
       localStorage.setItem(liftId, JSON.stringify(e.target.checked));
@@ -102,10 +160,25 @@ function renderToday() {
   // Update Today card title
   const today = new Date();
   const formattedDate = `${String(today.getMonth()+1).padStart(2,'0')}/${String(today.getDate()).padStart(2,'0')}/${String(today.getFullYear()).slice(-2)}`;
-  document.getElementById('todayTitle').innerText = `Today’s Workout — ${formattedDate} (${firstDayName})`;
+  document.getElementById('todayTitle').innerText = `Today’s Workout — ${formattedDate} (${todayDayName})`;
 }
-document.querySelectorAll('.phase-tabs .nav-link').forEach(tab => {
-  tab.addEventListener('shown.bs.tab', () => {
-    renderToday(); // Update Today card based on selected phase
+
+/* ==========================
+   TAB EVENT LISTENER
+========================== */
+function setupTabListeners() {
+  document.querySelectorAll('.phase-tabs .nav-link').forEach(tab => {
+    tab.addEventListener('shown.bs.tab', () => {
+      renderToday();
+    });
   });
+}
+
+/* ==========================
+   INITIALIZE APP
+========================== */
+document.addEventListener('DOMContentLoaded', () => {
+  renderPhases();
+  renderToday();
+  setupTabListeners();
 });
