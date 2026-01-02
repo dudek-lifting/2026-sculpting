@@ -1,194 +1,312 @@
-/* ==========================
-   PROGRAM DATA (12-WEEK COMPLETE)
-========================== */
+/* ============================
+   PROGRAM DATA (4 DAYS / WEEK)
+============================ */
+
 const program = {
-  "Phase 1": {
-    name: "Weeks 1–3",
+  1: {
+    phase: "Foundation Volume",
     days: {
-      "Day 1 — Lower (Volume)": [
-        { name: "Back Squat", sets: "4×8" },
-        { name: "Romanian Deadlift", sets: "4×10" },
-        { name: "Walking Lunges", sets: "3×12" }
-      ],
-      "Day 2 — Upper Push": [
-        { name: "Bench Press", sets: "4×8" },
-        { name: "Incline DB Press", sets: "3×10" },
-        { name: "Triceps Superset", sets: "3×12" }
-      ]
+      1: {
+        title: "Back & Rear Delts",
+        lifts: [
+          "Deadlifts",
+          "Pull-Ups",
+          "Single-Arm DB Rows",
+          "T-Bar Rows",
+          "Bent-Over Lateral Raises"
+        ]
+      },
+      2: {
+        title: "Chest & Anterior / Lateral Delts",
+        lifts: [
+          "Incline DB Press",
+          "Flat Bench Press",
+          "Landmine Press",
+          "Dumbbell Flys",
+          "Alt DB Front Raises",
+          "Lateral Raises"
+        ]
+      },
+      3: {
+        title: "Legs",
+        lifts: [
+          "Squats",
+          "Walking Lunges",
+          "Romanian Deadlifts",
+          "Glute Bridges",
+          "Kettlebell Swings",
+          "Seated Calf Raises"
+        ]
+      },
+      4: {
+        title: "Arms & Traps",
+        lifts: [
+          "Alt Hammer Curls",
+          "Close-Grip Bench Press",
+          "Barbell Shrug / High Row",
+          "Skull Crushers",
+          "Barbell Curls",
+          "Single-Arm Cable Pushdowns",
+          "Underhand Pulldowns"
+        ]
+      }
     }
   },
-  "Phase 2": {
-    name: "Weeks 4–6",
+
+  2: {
+    phase: "Foundation Volume II",
     days: {
-      "Day 1 — Lower Intensity": [
-        { name: "Back Squat", sets: "5×5" },
-        { name: "Romanian Deadlift", sets: "4×8" },
-        { name: "Front Lunges", sets: "3×12" },
-        { name: "Leg Press", sets: "3×10" }
-      ],
-      "Day 2 — Upper Push Intensity": [
-        { name: "Bench Press", sets: "5×5" },
-        { name: "Incline DB Press", sets: "4×8" },
-        { name: "DB Lateral Raises", sets: "3×15" },
-        { name: "Triceps Rope Pushdown", sets: "3×12" }
-      ]
+      1: {
+        title: "Back & Rear Delts",
+        lifts: [
+          "Deadlifts (Smith)",
+          "Inverted Rows / Pull-Ups",
+          "Renegade Rows",
+          "Single-Arm Cable Rows",
+          "Rear Delt Raises",
+          "Straight-Bar Cable Rows"
+        ]
+      },
+      2: {
+        title: "Chest & Delts",
+        lifts: [
+          "Incline DB Press",
+          "Flat Bench Press",
+          "Landmine Press",
+          "Decline DB Flys",
+          "Alt DB Front Raises",
+          "Lateral Raises"
+        ]
+      },
+      3: {
+        title: "Legs",
+        lifts: [
+          "Squats",
+          "Walking Lunges",
+          "Romanian Deadlifts",
+          "Glute Bridges",
+          "Kettlebell Swings",
+          "Seated Calf Raises"
+        ]
+      },
+      4: {
+        title: "Arms & Traps",
+        lifts: [
+          "Close-Grip Bench Press",
+          "Skull Crushers",
+          "Kickbacks",
+          "Underhand Pulldowns",
+          "Barbell Curls",
+          "Hammer Curls",
+          "Barbell Shrug / High Row"
+        ]
+      }
     }
   },
-  "Phase 3": {
-    name: "Weeks 7–9",
+
+  3: {
+    phase: "Foundation Volume III",
     days: {
-      "Day 1 — Strength Peak Lower": [
-        { name: "Back Squat", sets: "3–5 reps" },
-        { name: "Deadlift", sets: "3–5 reps" },
-        { name: "Walking Lunges", sets: "3×10" }
-      ],
-      "Day 2 — Strength Peak Upper": [
-        { name: "Bench Press", sets: "3–5 reps" },
-        { name: "Pull-Ups", sets: "3×6–10" },
-        { name: "DB Rows", sets: "3×8–12" },
-        { name: "Overhead Press", sets: "3×6–10" }
-      ]
+      1: {
+        title: "Back & Rear Delts",
+        lifts: [
+          "Deadlifts",
+          "Pull-Ups",
+          "Single-Arm DB Rows",
+          "T-Bar Rows",
+          "Bent-Over Lateral Raises"
+        ]
+      },
+      2: {
+        title: "Chest & Delts",
+        lifts: [
+          "Incline DB Press",
+          "Flat Bench Press",
+          "Landmine Press",
+          "Dumbbell Flys",
+          "Alt DB Front Raises",
+          "Lateral Raises"
+        ]
+      },
+      3: {
+        title: "Legs",
+        lifts: [
+          "Squats",
+          "Walking Lunges",
+          "Romanian Deadlifts",
+          "Glute Bridges",
+          "Kettlebell Swings",
+          "Seated Calf Raises"
+        ]
+      },
+      4: {
+        title: "Arms & Traps",
+        lifts: [
+          "Close-Grip Bench Press",
+          "Skull Crushers",
+          "Kickbacks",
+          "Underhand Pulldowns",
+          "Barbell Curls",
+          "Hammer Curls",
+          "Barbell Shrugs"
+        ]
+      }
     }
   },
-  "Phase 4": {
-    name: "Weeks 10–12",
+
+  4: {
+    phase: "Structural Strength",
     days: {
-      "Day 1 — Final Sculpt Lower": [
-        { name: "Back Squat", sets: "4×12" },
-        { name: "RDL", sets: "4×12" },
-        { name: "Walking Lunges", sets: "3×15" },
-        { name: "Leg Press", sets: "3×12" }
-      ],
-      "Day 2 — Final Sculpt Upper": [
-        { name: "Bench Press", sets: "4×12" },
-        { name: "Incline DB Press", sets: "4×12" },
-        { name: "Pull-Ups", sets: "3×10–12" },
-        { name: "DB Lateral Raises", sets: "3×15" },
-        { name: "Triceps Superset", sets: "3×12–15" }
-      ]
+      1: {
+        title: "Legs & Calves",
+        lifts: [
+          "Squats",
+          "Step-Ups",
+          "Trap Bar Deadlifts",
+          "Lateral Box Squats",
+          "Romanian Deadlifts",
+          "Seated Calf Raises"
+        ]
+      },
+      2: {
+        title: "Back, Traps & Biceps",
+        lifts: [
+          "Incline DB Curls",
+          "Dumbbell Shrugs",
+          "Dumbbell Pullovers",
+          "Bent-Over Rows (Smith)",
+          "V-Grip Pull-Ups",
+          "Drag Curls"
+        ]
+      },
+      3: {
+        title: "Chest, Triceps & Back",
+        lifts: [
+          "Flat DB Press",
+          "Single-Arm DB Rows",
+          "Single-Arm DB Press",
+          "Incline Flys",
+          "Rear Delt Raises",
+          "Incline Barbell Press"
+        ]
+      },
+      4: {
+        title: "Delts & Forearms",
+        lifts: [
+          "Overhead Press",
+          "Reverse Curls",
+          "Reverse Upright Rows",
+          "Lateral Raises",
+          "Single-Arm KB Press",
+          "Finger Curls"
+        ]
+      }
     }
   }
 };
 
-/* ==========================
-   HELPER FUNCTIONS
-========================== */
+/* ============================
+   DOM REFERENCES
+============================ */
 
-// Map weekday to day in phase
-function getTodayDayName(phaseData) {
-  const dayNames = Object.keys(phaseData.days);
-  const todayIndex = (new Date().getDay() + 6) % 7; // Monday=0
-  return dayNames[todayIndex % dayNames.length] || dayNames[0];
+const phaseTabs = document.getElementById("phaseTabs");
+const phaseContent = document.getElementById("phaseContent");
+const todayTitle = document.getElementById("todayTitle");
+const todayCard = document.getElementById("todayWorkout");
+
+/* ============================
+   DATE & DAY LOGIC
+============================ */
+
+const today = new Date();
+const formattedDate = today.toLocaleDateString();
+const workoutDay = (today.getDay() + 6) % 7 % 4 + 1; // cycles Day 1–4
+
+todayTitle.textContent = `Today’s Workout — ${formattedDate}`;
+
+/* ============================
+   STORAGE HELPERS
+============================ */
+
+function storageKey(week, day, lift) {
+  return `w${week}-d${day}-${lift}`;
 }
 
-/* ==========================
-   RENDER PHASE TABS & CARDS
-========================== */
-function renderPhases() {
-  const tabs = document.getElementById('phaseTabs');
-  const content = document.getElementById('phaseContent');
+/* ============================
+   RENDER FUNCTIONS
+============================ */
 
-  Object.entries(program).forEach(([phaseKey, phaseData], index) => {
-    const phaseId = phaseKey.replace(/\s+/g, '_');
-
-    // Tab button
-    const li = document.createElement('li');
-    li.className = 'nav-item';
-    li.innerHTML = `
-      <button class="nav-link ${index===0?'active':''}" 
-              data-bs-toggle="pill" 
-              data-bs-target="#${phaseId}" 
-              type="button">
-        ${phaseData.name}
-      </button>
-    `;
-    tabs.appendChild(li);
-
-    // Tab content
-    const div = document.createElement('div');
-    div.className = `tab-pane fade ${index===0?'show active':''}`;
-    div.id = phaseId;
-
-    Object.entries(phaseData.days).forEach(([dayName, lifts]) => {
-      const card = document.createElement('div');
-      card.className = 'card p-3';
-      const liftList = lifts.map(l => `<span>${l.name} ${l.sets}</span>`).join('');
-      card.innerHTML = `<p class="fw-semibold">${dayName}</p>${liftList}`;
-      div.appendChild(card);
-    });
-
-    content.appendChild(div);
+function renderWeekTabs() {
+  Object.keys(program).forEach((week, i) => {
+    const btn = document.createElement("button");
+    btn.className = `nav-link ${i === 0 ? "active" : ""}`;
+    btn.textContent = `Week ${week}`;
+    btn.dataset.week = week;
+    btn.onclick = () => renderWeek(week, btn);
+    phaseTabs.appendChild(btn);
   });
 }
 
-/* ==========================
-   RENDER TODAY’S WORKOUT
-========================== */
-function renderToday() {
-  const activeTab = document.querySelector('.phase-tabs .nav-link.active');
-  const phaseName = activeTab.innerText;
-  const phaseKey = Object.keys(program).find(k => program[k].name === phaseName);
-  const phaseData = program[phaseKey];
+function renderWeek(week, clickedBtn) {
+  document
+    .querySelectorAll(".phase-tabs .nav-link")
+    .forEach(b => b.classList.remove("active"));
+  clickedBtn.classList.add("active");
 
-  const todayDayName = getTodayDayName(phaseData);
-  const lifts = phaseData.days[todayDayName];
+  phaseContent.innerHTML = "";
 
-  const todayLiftsDiv = document.getElementById('todayLifts');
-  todayLiftsDiv.innerHTML = '';
+  Object.entries(program[week].days).forEach(([dayNum, day]) => {
+    const card = document.createElement("div");
+    card.className = "card p-3";
 
-  lifts.forEach((lift, i) => {
-    const liftId = `lift-${phaseKey}-${todayDayName}-${i}`;
-    const checked = JSON.parse(localStorage.getItem(liftId)) || false;
-
-    const row = document.createElement('div');
-    row.className = 'lift-row';
-    if (checked) row.classList.add('completed');
-
-    row.innerHTML = `
-      <input type="checkbox" id="${liftId}" ${checked?'checked':''} aria-label="${lift.name} complete">
-      <span>${lift.name} ${lift.sets}</span>
-      <input type="number" class="form-control form-control-sm" placeholder="lbs">
+    card.innerHTML = `
+      <p class="fw-semibold">Day ${dayNum} — ${day.title}</p>
+      ${day.lifts.map(lift => `
+        <div class="lift-row">
+          <input type="checkbox"
+            ${localStorage.getItem(storageKey(week, dayNum, lift)) === "done" ? "checked" : ""}
+            onchange="localStorage.setItem('${storageKey(week, dayNum, lift)}','done')">
+          <span>${lift}</span>
+          <input type="number" class="form-control form-control-sm"
+            placeholder="lbs"
+            value="${localStorage.getItem(storageKey(week, dayNum, lift + '-w')) || ""}"
+            oninput="localStorage.setItem('${storageKey(week, dayNum, lift + '-w')}', this.value)">
+        </div>
+      `).join("")}
     `;
 
-    todayLiftsDiv.appendChild(row);
-
-    row.querySelector('input[type="checkbox"]').addEventListener('change', e => {
-      row.classList.toggle('completed', e.target.checked);
-      localStorage.setItem(liftId, JSON.stringify(e.target.checked));
-    });
+    phaseContent.appendChild(card);
   });
 
-  // StairClimber
-  const stairCheckbox = document.getElementById('stairCheckbox');
-  stairCheckbox.checked = JSON.parse(localStorage.getItem('stairCheckbox')) || false;
-  stairCheckbox.addEventListener('change', () => {
-    stairCheckbox.closest('.alert').classList.toggle('checked', stairCheckbox.checked);
-    localStorage.setItem('stairCheckbox', JSON.stringify(stairCheckbox.checked));
-  });
-  stairCheckbox.closest('.alert').classList.toggle('checked', stairCheckbox.checked);
-
-  // Update Today card title
-  const today = new Date();
-  const formattedDate = `${String(today.getMonth()+1).padStart(2,'0')}/${String(today.getDate()).padStart(2,'0')}/${String(today.getFullYear()).slice(-2)}`;
-  document.getElementById('todayTitle').innerText = `Today’s Workout — ${formattedDate} (${todayDayName})`;
+  renderTodayWorkout(week);
 }
 
-/* ==========================
-   TAB EVENT LISTENER
-========================== */
-function setupTabListeners() {
-  document.querySelectorAll('.phase-tabs .nav-link').forEach(tab => {
-    tab.addEventListener('shown.bs.tab', () => {
-      renderToday();
-    });
-  });
+function renderTodayWorkout(week) {
+  todayCard.innerHTML = "";
+
+  const day = program[week].days[workoutDay];
+  if (!day) return;
+
+  const card = document.createElement("div");
+  card.className = "card p-3";
+
+  card.innerHTML = `
+    <p class="fw-semibold">Day ${workoutDay} — ${day.title}</p>
+    ${day.lifts.map(lift => `
+      <div class="lift-row">
+        <input type="checkbox">
+        <span>${lift}</span>
+        <input type="number" class="form-control form-control-sm" placeholder="lbs">
+      </div>
+    `).join("")}
+  `;
+
+  todayCard.appendChild(card);
 }
 
-/* ==========================
-   INITIALIZE APP
-========================== */
-document.addEventListener('DOMContentLoaded', () => {
-  renderPhases();
-  renderToday();
-  setupTabListeners();
-});
+/* ============================
+   INIT
+============================ */
+
+renderWeekTabs();
+renderWeek(Object.keys(program)[0], phaseTabs.children[0]);
