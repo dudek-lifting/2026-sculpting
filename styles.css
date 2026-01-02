@@ -182,3 +182,20 @@ footer {
   opacity: 0.6;
   margin-top: 2.5rem;
 }
+
+/* ============================
+   MOBILE PHASE TAB LAYOUT FIX
+   (2 tabs per row)
+============================ */
+@media (max-width: 576px) {
+  .phase-tabs {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .phase-tabs .nav-link {
+    flex: 0 0 50%;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+}
