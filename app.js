@@ -239,6 +239,9 @@ function renderBlock(block, btn) {
 
   // Clear previous content
   phaseContent.innerHTML = "";
+   phaseContent.classList.remove("phase-enter");
+void phaseContent.offsetWidth; // forces reflow
+phaseContent.classList.add("phase-enter");
 
   // --- WEEK COUNTER INPUT ---
   const weekCounterDiv = document.createElement("div");
