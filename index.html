@@ -9,183 +9,237 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
+/* ========== GLOBAL ========== */
 body {
   font-family: 'Oswald', sans-serif;
-  background: linear-gradient(180deg, #0f2027, #203a43, #2c5364);
+  background: linear-gradient(180deg, #0f2027, #203a43);
   color: #f5f5f5;
 }
-.program-header {
+h1,h2,h3,h4,h5 { letter-spacing: 0.5px; }
+.container { max-width: 900px; }
+
+/* ========== HEADER ========== */
+header {
   text-align: center;
-  padding: 2rem 1rem;
+  padding: 2rem 1rem 1.5rem;
 }
-.program-header h1 {
-  color: #f9c74f;
+header h1 { color: #f9c74f; }
+.phase-badge {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
 }
+.phase-1 { background: rgba(144,219,244,.2); color: #90dbf4; }
+.phase-2 { background: rgba(249,199,79,.2); color: #f9c74f; }
+.phase-3 { background: rgba(238,155,0,.2); color: #ee9b00; }
+
+/* ========== CARDS ========== */
 .workout-card {
-  background: rgba(0,0,0,0.55);
-  border-radius: 16px;
+  background: rgba(0,0,0,.55);
+  border-radius: 18px;
   padding: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
-.workout-card h4 {
-  color: #f9c74f;
+.hero {
+  border: 2px solid #f9c74f;
+  box-shadow: 0 0 25px rgba(249,199,79,.25);
 }
 .exercise {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 0.5rem;
+  gap: .6rem;
+  margin-bottom: .45rem;
 }
 .exercise input[type="number"] {
   width: 80px;
 }
+.exercise span {
+  opacity: .7;
+  font-size: .9rem;
+}
+.section {
+  margin-top: 1rem;
+}
 .section-title {
   color: #90dbf4;
-  margin-top: 1rem;
-  font-size: 0.9rem;
+  font-size: .9rem;
+  margin-bottom: .4rem;
   text-transform: uppercase;
 }
-.stair {
-  background: rgba(249,199,79,0.15);
-  padding: 0.75rem;
-  border-radius: 8px;
-  margin-top: 1rem;
+.superset {
+  border-left: 3px solid #90dbf4;
+  padding-left: .8rem;
 }
-.today-highlight {
-  border: 2px solid #f9c74f;
-  box-shadow: 0 0 20px rgba(249,199,79,0.4);
+.stairs {
+  background: rgba(249,199,79,.15);
+  border-radius: 12px;
+  padding: .6rem;
+  margin-top: .75rem;
 }
 .progression {
-  font-size: 0.85rem;
+  font-size: .8rem;
   color: #f9c74f;
-  margin-left: 28px;
+  margin-left: 1.7rem;
 }
-.mobile-only {
-  display: none;
+
+/* ========== NAV ========== */
+.nav-pills .nav-link {
+  color: #ccc;
 }
-@media (max-width: 768px) {
-  .mobile-only {
-    display: block;
-  }
+.nav-pills .nav-link.active {
+  background: #f9c74f;
+  color: #000;
+}
+
+/* ========== MOBILE ========== */
+@media(max-width:768px){
+  .container { padding: 0 .75rem; }
+  .exercise span { display:none; }
+}
+footer {
+  text-align: center;
+  padding: 2rem;
+  opacity: .6;
+  font-size: .85rem;
 }
 </style>
 </head>
 
 <body>
 
-<div class="program-header">
+<header>
   <h1>12-Week Strength & Conditioning</h1>
-  <p class="lead">Personalized. Tracked. Progressive.</p>
+  <p>Personalized • Tracked • Progressive</p>
 
-  <!-- PROFILE SELECTOR -->
-  <div class="d-flex justify-content-center mt-3">
-    <select id="athleteSelect" class="form-select w-auto">
-      <option>Zach</option>
-      <option>Dave</option>
-      <option>Holly</option>
-    </select>
+  <select id="athlete" class="form-select w-auto mx-auto">
+    <option>Zach</option>
+    <option>Dave</option>
+    <option>Holly</option>
+  </select>
+
+  <div id="phaseBadge" class="phase-badge phase-1">
+    Phase 1 – Base Strength & Volume
+  </div>
+</header>
+
+<main class="container">
+
+<!-- TODAY -->
+<section>
+<h2 class="mb-3">Today’s Workout</h2>
+<div id="todayCard"></div>
+</section>
+
+<!-- UPCOMING -->
+<section class="mt-4">
+<h2 class="mb-3">Upcoming</h2>
+
+<ul class="nav nav-pills justify-content-center mb-3">
+  <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#day1">Day 1</button></li>
+  <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#day2">Day 2</button></li>
+  <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#day3">Day 3</button></li>
+  <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#day4">Day 4</button></li>
+</ul>
+
+<div class="tab-content">
+
+<div class="tab-pane fade show active" id="day1">
+  <div class="workout-card">
+    <h4>Lower Strength</h4>
+    <p class="opacity-75">Squat • Hinge • Legs</p>
   </div>
 </div>
 
-<div class="container">
-
-<!-- TODAY VIEW -->
-<div class="mobile-only mb-4">
-  <h3 class="text-center text-warning mb-3">Today’s Workout</h3>
-  <div id="todayWorkout"></div>
+<div class="tab-pane fade" id="day2">
+  <div class="workout-card">
+    <h4>Upper Push</h4>
+    <p class="opacity-75">Bench • Shoulders • Triceps</p>
+  </div>
 </div>
 
-<!-- WEEK 1 -->
-<div class="workout-card" data-day="1">
-<h4>Day 1 – Lower Strength</h4>
-
-<div class="section-title">Primary Lifts</div>
-
-<div class="exercise">
-  <input type="checkbox" data-key="squat_complete">
-  Back Squat 4×6–8
-  <input type="number" placeholder="lbs" data-key="squat_weight">
+<div class="tab-pane fade" id="day3">
+  <div class="workout-card">
+    <h4>Upper Pull</h4>
+    <p class="opacity-75">Deadlift • Rows • Pull-ups</p>
+  </div>
 </div>
-<div class="progression" data-prog="squat"></div>
 
-<div class="exercise">
-  <input type="checkbox" data-key="rdl_complete">
-  Romanian Deadlift 4×8
-  <input type="number" placeholder="lbs" data-key="rdl_weight">
-</div>
-<div class="progression" data-prog="rdl"></div>
-
-<div class="stair">
-  <strong>StairClimber:</strong> 30 min steady
-  <input type="checkbox" data-key="stairs_done">
-</div>
+<div class="tab-pane fade" id="day4">
+  <div class="workout-card">
+    <h4>Lower + Conditioning</h4>
+    <p class="opacity-75">Front Squat • Hip Thrust • Core</p>
+  </div>
 </div>
 
 </div>
+</section>
 
-<footer class="text-center mt-5 opacity-75">
-Built for Zach • Dave • Holly
+</main>
+
+<footer>
+Built for Zach • Dave • Holly<br>
+Weeks 1–12 • Progressive Overload • Train With Intent
 </footer>
 
 <script>
-const athleteSelect = document.getElementById('athleteSelect');
-let athlete = localStorage.getItem('currentAthlete') || 'Zach';
-athleteSelect.value = athlete;
-
-athleteSelect.addEventListener('change', () => {
-  localStorage.setItem('currentAthlete', athleteSelect.value);
+/* ===== ATHLETE ===== */
+const athleteSel = document.getElementById('athlete');
+let athlete = localStorage.getItem('athlete') || 'Zach';
+athleteSel.value = athlete;
+athleteSel.onchange = () => {
+  localStorage.setItem('athlete', athleteSel.value);
   location.reload();
-});
+};
 
-athlete = athleteSelect.value;
+/* ===== WEEK / PHASE ===== */
+const week = Math.min(12, Math.max(1, Math.ceil((Date.now()/86400000)%84/7)));
+const phaseBadge = document.getElementById('phaseBadge');
 
-// LOAD / SAVE INPUTS
-document.querySelectorAll('input').forEach(input => {
-  const baseKey = input.dataset.key;
-  if (!baseKey) return;
-  const key = athlete + '_' + baseKey;
-
-  if (input.type === 'checkbox') {
-    input.checked = localStorage.getItem(key) === 'true';
-    input.addEventListener('change', () => {
-      localStorage.setItem(key, input.checked);
-      updateProgression();
-    });
-  }
-
-  if (input.type === 'number') {
-    input.value = localStorage.getItem(key) || '';
-    input.addEventListener('input', () => {
-      localStorage.setItem(key, input.value);
-      updateProgression();
-    });
-  }
-});
-
-// PROGRESSION LOGIC
-function updateProgression() {
-  document.querySelectorAll('[data-prog]').forEach(el => {
-    const lift = el.dataset.prog;
-    const completed = localStorage.getItem(athlete + '_' + lift + '_complete') === 'true';
-    const weight = localStorage.getItem(athlete + '_' + lift + '_weight');
-
-    if (completed && weight) {
-      const next = parseInt(weight) + 5;
-      el.innerHTML = `Suggested next session: <strong>${next} lbs</strong>`;
-    } else {
-      el.innerHTML = '';
-    }
-  });
+if(week<=4){
+  phaseBadge.className='phase-badge phase-1';
+  phaseBadge.textContent='Phase 1 – Base Strength & Volume';
+}else if(week<=8){
+  phaseBadge.className='phase-badge phase-2';
+  phaseBadge.textContent='Phase 2 – Strength Emphasis';
+}else{
+  phaseBadge.className='phase-badge phase-3';
+  phaseBadge.textContent='Phase 3 – Density & Conditioning';
 }
-updateProgression();
 
-// TODAY DETECTION
-const today = new Date().getDay();
-const todayCard = document.querySelector(`.workout-card[data-day="${today}"]`);
-if (todayCard) {
-  todayCard.classList.add('today-highlight');
-  document.getElementById('todayWorkout').appendChild(todayCard.cloneNode(true));
-}
+/* ===== TODAY CARD ===== */
+const todayIndex = new Date().getDay() || 7;
+const todayCard = document.getElementById('todayCard');
+
+todayCard.innerHTML = `
+<div class="workout-card hero">
+<h3>Day ${todayIndex} – Lower Strength</h3>
+
+<div class="section">
+<div class="section-title">Primary</div>
+<div class="exercise">
+<input type="checkbox"> Back Squat
+<input type="number" placeholder="lbs">
+</div>
+<div class="exercise">
+<input type="checkbox"> Romanian Deadlift
+<input type="number" placeholder="lbs">
+</div>
+</div>
+
+<div class="section superset">
+<div class="section-title">Superset A</div>
+<div class="exercise"><input type="checkbox"> Walking Lunges</div>
+<div class="exercise"><input type="checkbox"> Leg Curl</div>
+</div>
+
+<div class="stairs">
+StairClimber: 30 min steady
+<input type="checkbox">
+</div>
+</div>
+`;
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
