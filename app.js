@@ -1,10 +1,11 @@
 /* ============================
    PROGRAM DATA (4 DAYS / WEEK)
+   SAME LIFTS FOR 3 WEEKS
 ============================ */
 
-const program = {
+const programBlocks = {
   1: {
-    phase: "Foundation Volume",
+    label: "Weeks 1–3",
     days: {
       1: {
         title: "Back & Rear Delts",
@@ -54,51 +55,147 @@ const program = {
   },
 
   2: {
-    phase: "Foundation Volume II",
+    label: "Weeks 4–6",
     days: {
       1: {
-        title: "Back & Rear Delts",
+        title: "Legs & Calves",
         lifts: [
-          "Deadlifts (Smith)",
-          "Inverted Rows / Pull-Ups",
-          "Renegade Rows",
-          "Single-Arm Cable Rows",
-          "Rear Delt Raises",
-          "Straight-Bar Cable Rows"
+          "Squats",
+          "Step-Ups",
+          "Trap Bar Deadlifts",
+          "Lateral Box Squats",
+          "Romanian Deadlifts",
+          "Seated Calf Raises"
         ]
       },
       2: {
-        title: "Chest & Delts",
+        title: "Back, Traps & Biceps",
         lifts: [
-          "Incline DB Press",
-          "Flat Bench Press",
-          "Landmine Press",
-          "Decline DB Flys",
-          "Alt DB Front Raises",
-          "Lateral Raises"
+          "Incline DB Curls",
+          "Dumbbell Shrugs",
+          "Dumbbell Pullovers",
+          "Bent-Over Rows (Smith)",
+          "V-Grip Pull-Ups",
+          "Drag Curls"
         ]
       },
       3: {
-        title: "Legs",
+        title: "Chest, Triceps & Back",
         lifts: [
-          "Squats",
+          "Flat DB Press",
+          "Single-Arm DB Rows",
+          "Single-Arm DB Press",
+          "Incline Flys",
+          "Rear Delt Raises",
+          "Incline Barbell Press"
+        ]
+      },
+      4: {
+        title: "Delts & Forearms",
+        lifts: [
+          "Overhead Press",
+          "Reverse Curls",
+          "Reverse Upright Rows",
+          "Lateral Raises",
+          "Single-Arm KB Press",
+          "Finger Curls"
+        ]
+      }
+    }
+  },
+
+  3: {
+    label: "Weeks 7–9",
+    days: {
+      1: {
+        title: "Back & Trapezius",
+        lifts: [
+          "Pull-Ups",
+          "T-Bar Rows",
+          "Pendlay Rows",
+          "Dumbbell Pullovers",
+          "Rack Pulls",
+          "Barbell Shrugs"
+        ]
+      },
+      2: {
+        title: "Chest",
+        lifts: [
+          "Barbell Press (Smith)",
+          "Incline DB Press",
+          "Dumbbell Flys",
+          "Weighted Dips",
+          "Cable Crossovers",
+          "Landmine Press"
+        ]
+      },
+      3: {
+        title: "Legs & Calves",
+        lifts: [
+          "Box Squats",
           "Walking Lunges",
           "Romanian Deadlifts",
-          "Glute Bridges",
-          "Kettlebell Swings",
+          "Hamstring Curls",
           "Seated Calf Raises"
         ]
       },
       4: {
-        title: "Arms & Traps",
+        title: "Arms",
+        lifts: [
+          "Skull Crushers",
+          "Close-Grip Bench Press",
+          "Rope Extensions",
+          "Seated DB Curls",
+          "Underhand Pulldowns",
+          "Reverse Curls"
+        ]
+      }
+    }
+  },
+
+  4: {
+    label: "Weeks 10–12",
+    days: {
+      1: {
+        title: "Back & Chest",
+        lifts: [
+          "Flat DB Bench Press",
+          "Dumbbell Pullovers",
+          "Straight-Arm Pulldowns",
+          "Incline DB Flys",
+          "Bent-Over DB Rows",
+          "Pull-Ups"
+        ]
+      },
+      2: {
+        title: "Legs",
+        lifts: [
+          "Squats",
+          "Romanian Deadlifts",
+          "Walking Lunges",
+          "Leg Extensions",
+          "Hamstring Curls",
+          "Standing Calf Raises"
+        ]
+      },
+      3: {
+        title: "Shoulders & Traps",
+        lifts: [
+          "Arnold Press",
+          "Cable Face Pulls",
+          "Bent-Over Lateral Raises",
+          "Lateral Raises",
+          "Barbell Shrugs"
+        ]
+      },
+      4: {
+        title: "Arms",
         lifts: [
           "Close-Grip Bench Press",
-          "Skull Crushers",
-          "Kickbacks",
-          "Underhand Pulldowns",
-          "Barbell Curls",
-          "Hammer Curls",
-          "Barbell Shrug / High Row"
+          "Bench Dips",
+          "Cable Tricep Extensions",
+          "Concentration Curls",
+          "Cable Curls"
         ]
       }
     }
@@ -113,37 +210,35 @@ const phaseTabs = document.getElementById("phaseTabs");
 const phaseContent = document.getElementById("phaseContent");
 
 /* ============================
-   STORAGE HELPERS
+   STORAGE KEY
 ============================ */
 
-function liftKey(week, day, lift) {
-  return `w${week}-d${day}-${lift}`;
+function key(block, day, lift) {
+  return `b${block}-d${day}-${lift}`;
 }
 
 /* ============================
    RENDER FUNCTIONS
 ============================ */
 
-function renderWeekTabs() {
-  Object.keys(program).forEach((week, i) => {
+function renderTabs() {
+  Object.entries(programBlocks).forEach(([block, data], index) => {
     const btn = document.createElement("button");
-    btn.className = `nav-link ${i === 0 ? "active" : ""}`;
-    btn.textContent = `Week ${week}`;
-    btn.dataset.week = week;
-    btn.onclick = () => renderWeek(week, btn);
+    btn.className = `nav-link ${index === 0 ? "active" : ""}`;
+    btn.textContent = data.label;
+    btn.onclick = () => renderBlock(block, btn);
     phaseTabs.appendChild(btn);
   });
 }
 
-function renderWeek(week, clickedBtn) {
-  document
-    .querySelectorAll(".phase-tabs .nav-link")
+function renderBlock(block, btn) {
+  document.querySelectorAll(".phase-tabs .nav-link")
     .forEach(b => b.classList.remove("active"));
-  clickedBtn.classList.add("active");
+  btn.classList.add("active");
 
   phaseContent.innerHTML = "";
 
-  Object.entries(program[week].days).forEach(([dayNum, day]) => {
+  Object.entries(programBlocks[block].days).forEach(([dayNum, day]) => {
     const card = document.createElement("div");
     card.className = "card p-3";
 
@@ -153,24 +248,22 @@ function renderWeek(week, clickedBtn) {
       ${day.lifts.map(lift => `
         <div class="lift-row">
           <input type="checkbox"
-            ${localStorage.getItem(liftKey(week, dayNum, lift)) === "done" ? "checked" : ""}
-            onchange="localStorage.setItem('${liftKey(week, dayNum, lift)}', this.checked ? 'done' : '')">
+            ${localStorage.getItem(key(block, dayNum, lift)) === "done" ? "checked" : ""}
+            onchange="localStorage.setItem('${key(block, dayNum, lift)}', this.checked ? 'done' : '')">
           <span>${lift}</span>
-          <input
-            type="number"
+          <input type="number"
             class="form-control form-control-sm"
             placeholder="lbs"
-            value="${localStorage.getItem(liftKey(week, dayNum, lift + '-w')) || ""}"
-            oninput="localStorage.setItem('${liftKey(week, dayNum, lift + '-w')}', this.value)">
+            value="${localStorage.getItem(key(block, dayNum, lift + '-w')) || ""}"
+            oninput="localStorage.setItem('${key(block, dayNum, lift + '-w')}', this.value)">
         </div>
       `).join("")}
 
-      <!-- StairClimber -->
       <div class="lift-row mt-2">
         <input type="checkbox"
-          ${localStorage.getItem(liftKey(week, dayNum, "StairClimber")) === "done" ? "checked" : ""}
-          onchange="localStorage.setItem('${liftKey(week, dayNum, "StairClimber")}', this.checked ? 'done' : '')">
-        <span>StairClimber — 30 min (steady)</span>
+          ${localStorage.getItem(key(block, dayNum, "StairClimber")) === "done" ? "checked" : ""}
+          onchange="localStorage.setItem('${key(block, dayNum, "StairClimber")}', this.checked ? 'done' : '')">
+        <span>StairClimber — 30 min steady</span>
       </div>
     `;
 
@@ -182,5 +275,5 @@ function renderWeek(week, clickedBtn) {
    INIT
 ============================ */
 
-renderWeekTabs();
-renderWeek(Object.keys(program)[0], phaseTabs.children[0]);
+renderTabs();
+renderBlock("1", phaseTabs.children[0]);
