@@ -1,17 +1,26 @@
 /* ============================
-   GLOBAL BASE
+   GLOBAL RESET + BASE
 ============================ */
-* { box-sizing: border-box; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
 
 body {
   margin: 0;
   background: radial-gradient(circle at top, #102b33, #06171e 70%);
   color: #e9eef1;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* ============================
-   LAYOUT
+   APP LAYOUT
 ============================ */
 .app-container {
   max-width: 420px;
@@ -20,11 +29,13 @@ body {
 }
 
 @media (min-width: 768px) {
-  .app-container { max-width: 520px; }
+  .app-container {
+    max-width: 520px;
+  }
 }
 
 /* ============================
-   TITLE
+   TYPOGRAPHY
 ============================ */
 .title {
   text-align: center;
@@ -42,8 +53,10 @@ body {
 .title-sub {
   display: block;
   font-size: 1rem;
+  font-weight: 500;
   opacity: 0.85;
   text-transform: uppercase;
+  color: #e9eef1;
 }
 
 .subtitle {
@@ -51,36 +64,31 @@ body {
   font-size: 0.95rem;
   opacity: 0.85;
   margin-bottom: 1.25rem;
+  color: #e9eef1;
+}
+
+.section-title {
+  color: #f3c66b;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  margin-bottom: 0.5rem;
 }
 
 /* ============================
    CARDS
 ============================ */
 .card {
-  background: linear-gradient(145deg, #0b1f26, #0f2f37);
-  border-radius: 1.1rem;
+  background: linear-gradient(145deg, #1b2730, #1e2f3a); /* updated darker gradient */
+  border-radius: 1.2rem; /* slightly more rounded */
   margin-bottom: 1.1rem;
   padding: 1rem;
   box-shadow: 0 10px 30px rgba(0,0,0,.45);
   animation: cardFadeIn 0.25s ease both;
 }
 
-/* FORCE LEGIBLE TEXT INSIDE CARDS */
-.card,
-.card p,
-.card span,
-.card label {
-  color: #e9eef1 !important;
-}
-
-.card p.fw-semibold {
-  color: #f3c66b !important;
-  font-weight: 700;
-}
-
-@keyframes cardFadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: none; }
+.card p {
+  margin-bottom: 0.5rem;
+  color: #e9eef1;
 }
 
 /* ============================
@@ -88,8 +96,8 @@ body {
 ============================ */
 .lift-row {
   display: flex;
-  gap: 0.55rem;
   align-items: center;
+  gap: 0.55rem;
   margin-bottom: 0.75rem;
 }
 
@@ -99,26 +107,69 @@ body {
   color: #e9eef1;
 }
 
+.lift-row.completed span {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
 .lift-row input[type="checkbox"] {
   width: 18px;
   height: 18px;
   accent-color: #f3c66b;
 }
 
-.lift-row input[type="checkbox"]:checked + span {
-  text-decoration: line-through;
-  opacity: 0.55;
-}
-
 .lift-row input[type="number"] {
   max-width: 90px;
   background: #0a1d23;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: #e9eef1;
+  border-radius: 0.35rem;
+  padding: 0.25rem 0.4rem;
 }
 
 .lift-row input[type="number"]::placeholder {
-  color: rgba(255,255,255,0.45);
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ============================
+   STAIRCLIMBER / ALERT
+============================ */
+.alert {
+  background: linear-gradient(135deg, #182f36, #203e46);
+  color: #e9eef1;
+  border: none;
+  border-radius: 0.8rem;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 0.8rem;
+}
+
+.alert input[type="checkbox"] {
+  accent-color: #f3c66b;
+  margin-left: auto;
+}
+
+.alert.checked {
+  opacity: 0.7;
+  text-decoration: line-through;
+}
+
+/* ============================
+   USER SELECTOR
+============================ */
+select.form-select {
+  background-color: #0a1d23;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #e9eef1;
+  font-weight: 600;
+  border-radius: 0.75rem;
+}
+
+select.form-select:focus {
+  border-color: #f3c66b;
+  box-shadow: 0 0 0 0.15rem rgba(243, 198, 107, 0.25);
+  outline: none;
 }
 
 /* ============================
@@ -127,50 +178,31 @@ body {
 .phase-tabs {
   position: sticky;
   top: 0;
-  background: rgba(6,23,30,0.95);
-  backdrop-filter: blur(6px);
   z-index: 50;
+  background: linear-gradient(to bottom, rgba(6, 23, 30, 0.95), rgba(6, 23, 30, 0.85));
+  backdrop-filter: blur(6px);
+  padding: 0.4rem 0;
+  display: flex;
+  flex-wrap: wrap; /* allow 2 per row */
+  gap: 0.35rem;
+  justify-content: center;
 }
 
 .phase-tabs .nav-link {
-  color: rgba(255,255,255,0.75);
-  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.7);
   font-weight: 600;
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  transition: all 0.2s ease;
+  min-width: auto;
 }
 
 .phase-tabs .nav-link.active {
   background: #f3c66b;
   color: #06171e;
-}
-
-/* ============================
-   PHASE TRANSITION
-============================ */
-#phaseContent { will-change: opacity, transform; }
-
-.phase-enter {
-  animation: phaseFadeIn 0.35s ease forwards;
-}
-
-@keyframes phaseFadeIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: none; }
-}
-
-/* ============================
-   FORMS
-============================ */
-select.form-select,
-input.form-control {
-  background-color: #0a1d23;
-  border: 1px solid rgba(255,255,255,0.15);
-  color: #e9eef1;
-}
-
-select.form-select:focus,
-input.form-control:focus {
-  border-color: #f3c66b;
-  box-shadow: 0 0 0 0.15rem rgba(243,198,107,0.25);
+  padding: 0.35rem 0.7rem; /* narrower horizontal padding */
+  border-radius: 999px;
+  min-width: auto;
 }
 
 /* ============================
@@ -184,39 +216,71 @@ footer {
 }
 
 /* ============================
-   MOBILE PHASE TAB LAYOUT FIX
-   (2 tabs per row)
+   MICRO UX POLISH
 ============================ */
+input,
+select,
+button {
+  transition: all 0.15s ease-in-out;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+}
+
+/* ============================
+   APP TITLE STYLING
+============================ */
+.title {
+  text-align: center;
+  margin-bottom: 0.25rem;
+}
+
+.title-main {
+  display: block;
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.title-sub {
+  display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.85;
+  text-transform: uppercase;
+}
+
 @media (max-width: 576px) {
-  .phase-tabs {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .phase-tabs .nav-link {
-    flex: 0 0 50%;
-    text-align: center;
-    margin-bottom: 0.5rem;
+  .title-main {
+    font-size: 1.8rem;
+    letter-spacing: 0.1em;
   }
 }
 
 /* ============================
-   PHASE TAB CONTAINER POLISH
+   PHASE TRANSITION ANIMATION
 ============================ */
-.phase-tabs {
-  border-radius: 1rem;
-  margin: 0.75rem auto 1rem;
-  padding: 0.5rem;
-  max-width: 95%;
+.phase-enter {
+  animation: phaseFadeIn 0.3s ease forwards;
+}
+
+@keyframes phaseFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ============================
-   PHASE TAB ACTIVE PILL WIDTH
+   CARD ANIMATION
 ============================ */
-.phase-tabs .nav-link {
-  padding: 0.45rem 0.65rem;
-}
-
-.phase-tabs .nav-link.active {
-  padding: 0.45rem 0.7rem;
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
