@@ -92,7 +92,8 @@ body {
 
 .card p {
   margin-bottom: 0.5rem;
-  color: #ffffff;
+  color: #f3c66b; /* Day title color same as app title */
+  font-weight: 600;
 }
 
 /* ============================
@@ -113,7 +114,7 @@ body {
 
 .lift-row.completed span {
   text-decoration: line-through;
-  opacity: 0.6;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .lift-row input[type="checkbox"] {
@@ -139,30 +140,29 @@ body {
    PHASE TABS
 ============================ */
 .phase-tabs {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: linear-gradient(to bottom, rgba(43, 59, 92, 0.95), rgba(43, 59, 92, 0.85));
-  backdrop-filter: blur(6px);
-  padding: 0.4rem 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.5rem;
+  background: linear-gradient(to bottom, rgba(43, 59, 92, 0.95), rgba(43, 59, 92, 0.85));
+  padding: 0.4rem;
+  border-radius: 1rem; /* rounded card effect */
 }
 
 .phase-tabs .nav-link {
   color: rgba(255, 255, 255, 0.7);
   font-weight: 600;
-  border-radius: 1rem; /* rounded edges */
-  padding: 0.35rem 0.7rem;
+  border-radius: 2rem; /* pill-shaped */
+  padding: 0.35rem 0.6rem;
+  flex: 1 1 48%; /* 2 per row on mobile */
+  text-align: center;
   transition: all 0.2s ease;
 }
 
 .phase-tabs .nav-link.active {
   background: #f3c66b;
   color: #06171e;
-  padding: 0.35rem 0.6rem; /* narrower horizontal width */
+  padding: 0.35rem 0.5rem; /* slightly narrower */
 }
 
 /* ============================
