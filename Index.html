@@ -16,14 +16,14 @@ body {
 }
 .program-header {
   text-align: center;
-  padding: 2.5rem 1rem;
+  padding: 2rem 1rem;
 }
 .program-header h1 {
   color: #f9c74f;
 }
 .workout-card {
   background: rgba(0,0,0,0.55);
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
 }
@@ -33,27 +33,32 @@ body {
 .exercise {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.6rem;
   margin-bottom: 0.5rem;
 }
 .exercise input[type="number"] {
   width: 80px;
 }
-.today-highlight {
-  border: 2px solid #f9c74f;
-  box-shadow: 0 0 20px rgba(249,199,79,0.4);
-}
 .section-title {
   color: #90dbf4;
   margin-top: 1rem;
-  text-transform: uppercase;
   font-size: 0.9rem;
+  text-transform: uppercase;
 }
 .stair {
   background: rgba(249,199,79,0.15);
   padding: 0.75rem;
   border-radius: 8px;
   margin-top: 1rem;
+}
+.today-highlight {
+  border: 2px solid #f9c74f;
+  box-shadow: 0 0 20px rgba(249,199,79,0.4);
+}
+.progression {
+  font-size: 0.85rem;
+  color: #f9c74f;
+  margin-left: 28px;
 }
 .mobile-only {
   display: none;
@@ -70,97 +75,81 @@ body {
 
 <div class="program-header">
   <h1>12-Week Strength & Conditioning</h1>
-  <p class="lead">Train with purpose. Track everything.</p>
+  <p class="lead">Personalized. Tracked. Progressive.</p>
+
+  <!-- PROFILE SELECTOR -->
+  <div class="d-flex justify-content-center mt-3">
+    <select id="athleteSelect" class="form-select w-auto">
+      <option>Zach</option>
+      <option>Dave</option>
+      <option>Holly</option>
+    </select>
+  </div>
 </div>
 
 <div class="container">
 
-<!-- TODAY VIEW (MOBILE FIRST) -->
+<!-- TODAY VIEW -->
 <div class="mobile-only mb-4">
-  <h3 class="text-center mb-3 text-warning">Today’s Workout</h3>
+  <h3 class="text-center text-warning mb-3">Today’s Workout</h3>
   <div id="todayWorkout"></div>
 </div>
 
-<ul class="nav nav-tabs justify-content-center mb-4">
-  <li class="nav-item">
-    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#week1">Week 1</button>
-  </li>
-</ul>
-
-<div class="tab-content">
-
-<div class="tab-pane fade show active" id="week1">
-
-<!-- DAY 1 -->
+<!-- WEEK 1 -->
 <div class="workout-card" data-day="1">
 <h4>Day 1 – Lower Strength</h4>
 
 <div class="section-title">Primary Lifts</div>
-<div class="exercise">
-  <input type="checkbox" data-key="squat-check">
-  Back Squat 4×6–8
-  <input type="number" placeholder="lbs" data-key="squat-weight">
-</div>
-<div class="exercise">
-  <input type="checkbox" data-key="rdl-check">
-  Romanian Deadlift 4×8
-  <input type="number" placeholder="lbs" data-key="rdl-weight">
-</div>
 
-<div class="section-title">Accessories</div>
 <div class="exercise">
-  <input type="checkbox" data-key="lunges-check">
-  Walking Lunges 3×20
+  <input type="checkbox" data-key="squat_complete">
+  Back Squat 4×6–8
+  <input type="number" placeholder="lbs" data-key="squat_weight">
 </div>
+<div class="progression" data-prog="squat"></div>
+
 <div class="exercise">
-  <input type="checkbox" data-key="curl-check">
-  Leg Curl 3×12–15
+  <input type="checkbox" data-key="rdl_complete">
+  Romanian Deadlift 4×8
+  <input type="number" placeholder="lbs" data-key="rdl_weight">
 </div>
+<div class="progression" data-prog="rdl"></div>
 
 <div class="stair">
   <strong>StairClimber:</strong> 30 min steady
-  <input type="checkbox" data-key="stair1">
+  <input type="checkbox" data-key="stairs_done">
 </div>
 </div>
 
-<!-- DAY 2 -->
-<div class="workout-card" data-day="2">
-<h4>Day 2 – Upper Push</h4>
-
-<div class="exercise">
-  <input type="checkbox" data-key="bench-check">
-  Bench Press 4×6–8
-  <input type="number" placeholder="lbs" data-key="bench-weight">
-</div>
-<div class="exercise">
-  <input type="checkbox" data-key="incline-check">
-  Incline DB Press 3×10
-</div>
-
-<div class="stair">
-  <strong>StairClimber:</strong> 10 easy → 20 moderate
-  <input type="checkbox" data-key="stair2">
-</div>
-</div>
-
-</div>
-</div>
 </div>
 
 <footer class="text-center mt-5 opacity-75">
-Built for consistency • Data-driven progress
+Built for Zach • Dave • Holly
 </footer>
 
 <script>
-// LOCAL STORAGE SAVE
+const athleteSelect = document.getElementById('athleteSelect');
+let athlete = localStorage.getItem('currentAthlete') || 'Zach';
+athleteSelect.value = athlete;
+
+athleteSelect.addEventListener('change', () => {
+  localStorage.setItem('currentAthlete', athleteSelect.value);
+  location.reload();
+});
+
+athlete = athleteSelect.value;
+
+// LOAD / SAVE INPUTS
 document.querySelectorAll('input').forEach(input => {
-  const key = input.dataset.key;
-  if (!key) return;
+  const baseKey = input.dataset.key;
+  if (!baseKey) return;
+  const key = athlete + '_' + baseKey;
 
   if (input.type === 'checkbox') {
     input.checked = localStorage.getItem(key) === 'true';
     input.addEventListener('change', () => {
       localStorage.setItem(key, input.checked);
+      updateProgression();
     });
   }
 
@@ -168,13 +157,31 @@ document.querySelectorAll('input').forEach(input => {
     input.value = localStorage.getItem(key) || '';
     input.addEventListener('input', () => {
       localStorage.setItem(key, input.value);
+      updateProgression();
     });
   }
 });
 
-// TODAY WORKOUT AUTO-DETECT
-const day = new Date().getDay(); // 1=Mon
-const todayCard = document.querySelector(`.workout-card[data-day="${day}"]`);
+// PROGRESSION LOGIC
+function updateProgression() {
+  document.querySelectorAll('[data-prog]').forEach(el => {
+    const lift = el.dataset.prog;
+    const completed = localStorage.getItem(athlete + '_' + lift + '_complete') === 'true';
+    const weight = localStorage.getItem(athlete + '_' + lift + '_weight');
+
+    if (completed && weight) {
+      const next = parseInt(weight) + 5;
+      el.innerHTML = `Suggested next session: <strong>${next} lbs</strong>`;
+    } else {
+      el.innerHTML = '';
+    }
+  });
+}
+updateProgression();
+
+// TODAY DETECTION
+const today = new Date().getDay();
+const todayCard = document.querySelector(`.workout-card[data-day="${today}"]`);
 if (todayCard) {
   todayCard.classList.add('today-highlight');
   document.getElementById('todayWorkout').appendChild(todayCard.cloneNode(true));
