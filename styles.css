@@ -262,3 +262,22 @@ select:focus {
     letter-spacing: 0.1em;
   }
 }
+
+/* ============================
+   PHASE TRANSITION ANIMATION
+============================ */
+
+.phase-enter {
+  animation: phaseFadeIn 0.3s ease forwards;
+}
+
+@keyframes phaseFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
