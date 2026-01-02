@@ -255,3 +255,10 @@ select:focus {
   opacity: 0.85;
   text-transform: uppercase;
 }
+
+@media (max-width: 576px) {
+  .title-main {
+    font-size: 1.8rem;
+    letter-spacing: 0.1em;
+  }
+}
