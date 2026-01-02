@@ -13,7 +13,7 @@ html, body {
 
 body {
   margin: 0;
-  background: radial-gradient(circle at top, #27323c, #1e272f 70%);
+  background: #2b3b5c;
   color: #e9eef1;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -40,6 +40,7 @@ body {
 .title {
   text-align: center;
   margin-bottom: 0.25rem;
+  color: #f3c66b;
 }
 
 .title-main {
@@ -47,7 +48,6 @@ body {
   font-size: 2.2rem;
   font-weight: 800;
   letter-spacing: 0.15em;
-  color: #f3c66b;
 }
 
 .title-sub {
@@ -56,7 +56,6 @@ body {
   font-weight: 500;
   opacity: 0.85;
   text-transform: uppercase;
-  color: #f3c66b;
 }
 
 .subtitle {
@@ -64,7 +63,6 @@ body {
   font-size: 0.95rem;
   opacity: 0.85;
   margin-bottom: 1.25rem;
-  color: #e9eef1;
 }
 
 .section-title {
@@ -78,17 +76,23 @@ body {
    CARDS
 ============================ */
 .card {
-  background: linear-gradient(145deg, #121b23, #18212b);
+  background: linear-gradient(145deg, #182944, #1f3756);
   border-radius: 1.1rem;
   margin-bottom: 1.1rem;
   padding: 1rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,.45);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.05);
   animation: cardFadeIn 0.25s ease both;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.65), inset 0 0 0 1px rgba(255,255,255,0.05);
 }
 
 .card p {
   margin-bottom: 0.5rem;
-  color: #e9eef1;
+  color: #ffffff;
 }
 
 /* ============================
@@ -104,7 +108,7 @@ body {
 .lift-row span {
   flex: 1;
   font-size: 0.95rem;
-  color: #e9eef1;
+  color: #ffffff;
 }
 
 .lift-row.completed span {
@@ -122,7 +126,7 @@ body {
   max-width: 90px;
   background: #0a1d23;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #e9eef1;
+  color: #ffffff;
   border-radius: 0.35rem;
   padding: 0.25rem 0.4rem;
 }
@@ -132,43 +136,33 @@ body {
 }
 
 /* ============================
-   WEEK COUNTER INPUT
-============================ */
-#phaseContent input[type="text"] {
-  background: #0a1d23;
-  border: 1px solid rgba(255,255,255,0.08);
-  color: #e9eef1;
-  border-radius: 0.35rem;
-  text-align: center;
-}
-
-/* ============================
    PHASE TABS
 ============================ */
 .phase-tabs {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem;
   position: sticky;
   top: 0;
   z-index: 50;
-  background: linear-gradient(to bottom, rgba(6, 23, 30, 0.95), rgba(6, 23, 30, 0.85));
+  background: linear-gradient(to bottom, rgba(43, 59, 92, 0.95), rgba(43, 59, 92, 0.85));
   backdrop-filter: blur(6px);
   padding: 0.4rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .phase-tabs .nav-link {
-  text-align: center;
-  border-radius: 0.75rem;
-  padding: 0.45rem 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
   font-weight: 600;
-  color: rgba(255,255,255,0.7);
+  border-radius: 1rem; /* rounded edges */
+  padding: 0.35rem 0.7rem;
   transition: all 0.2s ease;
 }
 
 .phase-tabs .nav-link.active {
   background: #f3c66b;
   color: #06171e;
+  padding: 0.35rem 0.6rem; /* narrower horizontal width */
 }
 
 /* ============================
@@ -210,15 +204,5 @@ select:focus {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-/* ============================
-   APP TITLE STYLING
-============================ */
-@media (max-width: 576px) {
-  .title-main {
-    font-size: 1.8rem;
-    letter-spacing: 0.1em;
   }
 }
