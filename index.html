@@ -1,247 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>12-Week Strength & Conditioning</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12-Week Strength & Conditioning</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
 
-<style>
-/* ========== GLOBAL ========== */
-body {
-  font-family: 'Oswald', sans-serif;
-  background: linear-gradient(180deg, #0f2027, #203a43);
-  color: #f5f5f5;
-}
-h1,h2,h3,h4,h5 { letter-spacing: 0.5px; }
-.container { max-width: 900px; }
+  <style>
+    body {
+      background: radial-gradient(circle at top, #0f2a33, #06181f);
+      color: #eaeaea;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont;
+    }
 
-/* ========== HEADER ========== */
-header {
-  text-align: center;
-  padding: 2rem 1rem 1.5rem;
-}
-header h1 { color: #f9c74f; }
-.phase-badge {
-  display: inline-block;
-  margin-top: 0.75rem;
-  padding: 0.35rem 0.9rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-}
-.phase-1 { background: rgba(144,219,244,.2); color: #90dbf4; }
-.phase-2 { background: rgba(249,199,79,.2); color: #f9c74f; }
-.phase-3 { background: rgba(238,155,0,.2); color: #ee9b00; }
+    .app-container {
+      max-width: 420px;
+      margin: auto;
+      padding: 1rem;
+    }
 
-/* ========== CARDS ========== */
-.workout-card {
-  background: rgba(0,0,0,.55);
-  border-radius: 18px;
-  padding: 1.5rem;
-  margin-bottom: 1.25rem;
-}
-.hero {
-  border: 2px solid #f9c74f;
-  box-shadow: 0 0 25px rgba(249,199,79,.25);
-}
-.exercise {
-  display: flex;
-  align-items: center;
-  gap: .6rem;
-  margin-bottom: .45rem;
-}
-.exercise input[type="number"] {
-  width: 80px;
-}
-.exercise span {
-  opacity: .7;
-  font-size: .9rem;
-}
-.section {
-  margin-top: 1rem;
-}
-.section-title {
-  color: #90dbf4;
-  font-size: .9rem;
-  margin-bottom: .4rem;
-  text-transform: uppercase;
-}
-.superset {
-  border-left: 3px solid #90dbf4;
-  padding-left: .8rem;
-}
-.stairs {
-  background: rgba(249,199,79,.15);
-  border-radius: 12px;
-  padding: .6rem;
-  margin-top: .75rem;
-}
-.progression {
-  font-size: .8rem;
-  color: #f9c74f;
-  margin-left: 1.7rem;
-}
+    .title {
+      color: #f5c86a;
+      font-weight: 700;
+      text-align: center;
+    }
 
-/* ========== NAV ========== */
-.nav-pills .nav-link {
-  color: #ccc;
-}
-.nav-pills .nav-link.active {
-  background: #f9c74f;
-  color: #000;
-}
+    .subtitle {
+      text-align: center;
+      opacity: 0.85;
+    }
 
-/* ========== MOBILE ========== */
-@media(max-width:768px){
-  .container { padding: 0 .75rem; }
-  .exercise span { display:none; }
-}
-footer {
-  text-align: center;
-  padding: 2rem;
-  opacity: .6;
-  font-size: .85rem;
-}
-</style>
+    .card {
+      background: linear-gradient(145deg, #0b1f26, #0f2c34);
+      border: none;
+      border-radius: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .lift-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .lift-row input[type="number"] {
+      max-width: 90px;
+    }
+
+    .phase-tabs button {
+      font-weight: 600;
+    }
+
+    .section-title {
+      color: #f5c86a;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .badge-phase {
+      background: #1b3a42;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      opacity: 0.6;
+      margin-top: 2rem;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="app-container">
 
-<header>
-  <h1>12-Week Strength & Conditioning</h1>
-  <p>Personalized • Tracked • Progressive</p>
+    <h2 class="title">12-Week Strength & Conditioning</h2>
+    <p class="subtitle">Personalized • Tracked • Progressive</p>
 
-  <select id="athlete" class="form-select w-auto mx-auto">
-    <option>Zach</option>
-    <option>Dave</option>
-    <option>Holly</option>
-  </select>
+    <!-- User Selector -->
+    <div class="text-center mb-3">
+      <select class="form-select w-50 mx-auto">
+        <option>Zach</option>
+        <option>Dave</option>
+        <option>Holly</option>
+      </select>
+    </div>
 
-  <div id="phaseBadge" class="phase-badge phase-1">
-    Phase 1 – Base Strength & Volume
+    <!-- TODAY -->
+    <div class="card p-3">
+      <h5 class="section-title" id="todayTitle"></h5>
+      <span class="badge badge-phase mb-2">Phase Active</span>
+
+      <p class="fw-semibold mt-2">Day 1 — Lower Strength</p>
+
+      <div class="lift-row">
+        <input type="checkbox" />
+        <span>Back Squat 4×6–8</span>
+        <input type="number" class="form-control form-control-sm" placeholder="lbs">
+      </div>
+
+      <div class="lift-row">
+        <input type="checkbox" />
+        <span>Romanian Deadlift 4×8</span>
+        <input type="number" class="form-control form-control-sm" placeholder="lbs">
+      </div>
+
+      <div class="alert alert-dark mt-2">
+        StairClimber — 30 min steady
+        <input type="checkbox" class="form-check-input ms-2">
+      </div>
+    </div>
+
+    <!-- PHASE TABS -->
+    <ul class="nav nav-pills phase-tabs mb-3 justify-content-center" role="tablist">
+      <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#p1">Weeks 1–3</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#p2">Weeks 4–6</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#p3">Weeks 7–9</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#p4">Weeks 10–12</button></li>
+    </ul>
+
+    <div class="tab-content">
+
+      <!-- PHASE 1 -->
+      <div class="tab-pane fade show active" id="p1">
+        <div class="card p-3">
+          <p class="fw-semibold">Day 1 — Lower (Volume)</p>
+          <p>Back Squat 4×8<br>RDL 4×10<br>Walking Lunges 3×12</p>
+        </div>
+        <div class="card p-3">
+          <p class="fw-semibold">Day 2 — Upper Push</p>
+          <p>Bench Press 4×8<br>Incline DB Press 3×10<br>Triceps Superset</p>
+        </div>
+      </div>
+
+      <!-- PHASE 2 -->
+      <div class="tab-pane fade" id="p2">
+        <div class="card p-3">
+          <p class="fw-semibold">Intensity Phase</p>
+          <p>Lower reps, heavier loads<br>Supersets introduced</p>
+        </div>
+      </div>
+
+      <!-- PHASE 3 -->
+      <div class="tab-pane fade" id="p3">
+        <div class="card p-3">
+          <p class="fw-semibold">Strength Peak</p>
+          <p>Main lifts 3–5 reps<br>Reduced accessory volume</p>
+        </div>
+      </div>
+
+      <!-- PHASE 4 -->
+      <div class="tab-pane fade" id="p4">
+        <div class="card p-3">
+          <p class="fw-semibold">Final Sculpt</p>
+          <p>Density circuits<br>Metabolic finishers</p>
+        </div>
+      </div>
+
+    </div>
+
+    <footer>
+      Built for Zach • Dave • Holly
+    </footer>
   </div>
-</header>
 
-<main class="container">
+  <script>
+    const today = new Date();
+    const formatted =
+      String(today.getMonth() + 1).padStart(2, '0') + '/' +
+      String(today.getDate()).padStart(2, '0') + '/' +
+      String(today.getFullYear()).slice(-2);
 
-<!-- TODAY -->
-<section>
-<h2 class="mb-3">Today’s Workout</h2>
-<div id="todayCard"></div>
-</section>
+    document.getElementById("todayTitle").innerText =
+      `Today’s Workout — ${formatted}`;
+  </script>
 
-<!-- UPCOMING -->
-<section class="mt-4">
-<h2 class="mb-3">Upcoming</h2>
-
-<ul class="nav nav-pills justify-content-center mb-3">
-  <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#day1">Day 1</button></li>
-  <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#day2">Day 2</button></li>
-  <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#day3">Day 3</button></li>
-  <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#day4">Day 4</button></li>
-</ul>
-
-<div class="tab-content">
-
-<div class="tab-pane fade show active" id="day1">
-  <div class="workout-card">
-    <h4>Lower Strength</h4>
-    <p class="opacity-75">Squat • Hinge • Legs</p>
-  </div>
-</div>
-
-<div class="tab-pane fade" id="day2">
-  <div class="workout-card">
-    <h4>Upper Push</h4>
-    <p class="opacity-75">Bench • Shoulders • Triceps</p>
-  </div>
-</div>
-
-<div class="tab-pane fade" id="day3">
-  <div class="workout-card">
-    <h4>Upper Pull</h4>
-    <p class="opacity-75">Deadlift • Rows • Pull-ups</p>
-  </div>
-</div>
-
-<div class="tab-pane fade" id="day4">
-  <div class="workout-card">
-    <h4>Lower + Conditioning</h4>
-    <p class="opacity-75">Front Squat • Hip Thrust • Core</p>
-  </div>
-</div>
-
-</div>
-</section>
-
-</main>
-
-<footer>
-Built for Zach • Dave • Holly<br>
-Weeks 1–12 • Progressive Overload • Train With Intent
-</footer>
-
-<script>
-/* ===== ATHLETE ===== */
-const athleteSel = document.getElementById('athlete');
-let athlete = localStorage.getItem('athlete') || 'Zach';
-athleteSel.value = athlete;
-athleteSel.onchange = () => {
-  localStorage.setItem('athlete', athleteSel.value);
-  location.reload();
-};
-
-/* ===== WEEK / PHASE ===== */
-const week = Math.min(12, Math.max(1, Math.ceil((Date.now()/86400000)%84/7)));
-const phaseBadge = document.getElementById('phaseBadge');
-
-if(week<=4){
-  phaseBadge.className='phase-badge phase-1';
-  phaseBadge.textContent='Phase 1 – Base Strength & Volume';
-}else if(week<=8){
-  phaseBadge.className='phase-badge phase-2';
-  phaseBadge.textContent='Phase 2 – Strength Emphasis';
-}else{
-  phaseBadge.className='phase-badge phase-3';
-  phaseBadge.textContent='Phase 3 – Density & Conditioning';
-}
-
-/* ===== TODAY CARD ===== */
-const todayIndex = new Date().getDay() || 7;
-const todayCard = document.getElementById('todayCard');
-
-todayCard.innerHTML = `
-<div class="workout-card hero">
-<h3>Day ${todayIndex} – Lower Strength</h3>
-
-<div class="section">
-<div class="section-title">Primary</div>
-<div class="exercise">
-<input type="checkbox"> Back Squat
-<input type="number" placeholder="lbs">
-</div>
-<div class="exercise">
-<input type="checkbox"> Romanian Deadlift
-<input type="number" placeholder="lbs">
-</div>
-</div>
-
-<div class="section superset">
-<div class="section-title">Superset A</div>
-<div class="exercise"><input type="checkbox"> Walking Lunges</div>
-<div class="exercise"><input type="checkbox"> Leg Curl</div>
-</div>
-
-<div class="stairs">
-StairClimber: 30 min steady
-<input type="checkbox">
-</div>
-</div>
-`;
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
