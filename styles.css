@@ -199,3 +199,24 @@ footer {
     margin-bottom: 0.5rem;
   }
 }
+
+/* ============================
+   PHASE TAB CONTAINER POLISH
+============================ */
+.phase-tabs {
+  border-radius: 1rem;
+  margin: 0.75rem auto 1rem;
+  padding: 0.5rem;
+  max-width: 95%;
+}
+
+/* ============================
+   PHASE TAB ACTIVE PILL WIDTH
+============================ */
+.phase-tabs .nav-link {
+  padding: 0.45rem 0.65rem;
+}
+
+.phase-tabs .nav-link.active {
+  padding: 0.45rem 0.7rem;
+}
