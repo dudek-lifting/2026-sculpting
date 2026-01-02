@@ -115,7 +115,7 @@ const programBlocks = {
           "Pendlay Rows",
           "Dumbbell Pullovers",
           "Rack Pulls",
-          "Barbell Shrugs"
+          "Barbell Shurgs"
         ]
       },
       2: {
@@ -232,12 +232,33 @@ function renderTabs() {
 }
 
 function renderBlock(block, btn) {
+  // Update tab highlighting
   document.querySelectorAll(".phase-tabs .nav-link")
     .forEach(b => b.classList.remove("active"));
   btn.classList.add("active");
 
+  // Clear previous content
   phaseContent.innerHTML = "";
 
+  // --- WEEK COUNTER INPUT ---
+  const weekCounterDiv = document.createElement("div");
+  weekCounterDiv.className = "mb-3 text-center";
+  weekCounterDiv.innerHTML = `
+    <label for="weekStart-${block}" class="form-label fw-semibold" style="color:#f3c66b;">
+      Week Start (optional)
+    </label>
+    <input type="text" id="weekStart-${block}" 
+           class="form-control form-control-sm mx-auto" 
+           placeholder="e.g., 01/02/2026" 
+           style="max-width:180px;"
+           value="${localStorage.getItem('weekStart-'+block) || ''}">
+  `;
+  weekCounterDiv.querySelector("input").addEventListener("input", (e) => {
+    localStorage.setItem('weekStart-' + block, e.target.value);
+  });
+  phaseContent.appendChild(weekCounterDiv);
+
+  // --- RENDER DAYS ---
   Object.entries(programBlocks[block].days).forEach(([dayNum, day]) => {
     const card = document.createElement("div");
     card.className = "card p-3";
