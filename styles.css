@@ -21,7 +21,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-
 /* ============================
    APP LAYOUT
 ============================ */
@@ -37,7 +36,6 @@ body {
     max-width: 520px;
   }
 }
-
 
 /* ============================
    TYPOGRAPHY
@@ -64,7 +62,6 @@ body {
   letter-spacing: 0.3px;
 }
 
-
 /* ============================
    CARDS
 ============================ */
@@ -73,9 +70,7 @@ body {
   background: linear-gradient(145deg, #0b1f26, #0f2f37);
   border: none;
   border-radius: 1.1rem;
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.45),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.03);
   margin-bottom: 1.1rem;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
@@ -85,27 +80,18 @@ body {
   box-shadow: 0 14px 35px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.05);
 }
 
-.card p {
-  margin-bottom: 0.6rem;
-  color: #f3f3f3;
+.card p, .card span {
+  color: #f3f3f3 !important;
   text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   transition: color 0.15s ease;
 }
 
-.card p:hover {
+.card p:hover, .card span:hover {
   color: #f5d275;
 }
 
-.card p span {
-  display: block;
-  margin-bottom: 0.2rem;
-  color: #f3f3f3;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-}
-
-
 /* ============================
-   TODAY’S WORKOUT HIGHLIGHT
+   TODAY’S WORKOUT
 ============================ */
 
 #todayTitle {
@@ -123,7 +109,6 @@ body {
   letter-spacing: 0.5px;
 }
 
-
 /* ============================
    LIFT ROWS
 ============================ */
@@ -138,13 +123,19 @@ body {
 .lift-row span {
   flex: 1;
   font-size: 0.95rem;
-  color: #f3f3f3;
+  color: #f3f3f3 !important;
   text-shadow: 0 1px 2px rgba(0,0,0,0.5);
   transition: color 0.15s ease;
 }
 
 .lift-row span:hover {
   color: #f5d275;
+}
+
+.lift-row.completed span {
+  color: #d1d1d1;
+  text-decoration: line-through;
+  opacity: 0.8;
 }
 
 .lift-row input[type="checkbox"] {
@@ -156,24 +147,16 @@ body {
 .lift-row input[type="number"] {
   max-width: 90px;
   background: #0a1d23;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255,255,255,0.08);
   color: #e9eef1;
 }
 
 .lift-row input[type="number"]::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255,255,255,0.4);
 }
-
-/* Completed lifts */
-.lift-row.completed span {
-  color: #d1d1d1;
-  text-decoration: line-through;
-  opacity: 0.8;
-}
-
 
 /* ============================
-   STAIRCLIMBER / ALERT
+   STAIRCLIMBER
 ============================ */
 
 .alert {
@@ -194,14 +177,13 @@ body {
   color: #fff;
 }
 
-
 /* ============================
    USER SELECTOR
 ============================ */
 
 select.form-select {
   background-color: #0a1d23;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255,255,255,0.15);
   color: #e9eef1;
   font-weight: 600;
   border-radius: 0.75rem;
@@ -210,13 +192,12 @@ select.form-select {
 
 select.form-select:focus {
   border-color: #f3c66b;
-  box-shadow: 0 0 0 0.15rem rgba(243, 198, 107, 0.25);
+  box-shadow: 0 0 0 0.15rem rgba(243,198,107,0.25);
 }
 
 select.form-select:hover {
   border-color: #f3c66b;
 }
-
 
 /* ============================
    PHASE TABS
@@ -226,17 +207,13 @@ select.form-select:hover {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: linear-gradient(
-    to bottom,
-    rgba(6, 23, 30, 0.95),
-    rgba(6, 23, 30, 0.85)
-  );
+  background: linear-gradient(to bottom, rgba(6,23,30,0.95), rgba(6,23,30,0.85));
   backdrop-filter: blur(6px);
   padding: 0.4rem 0;
 }
 
 .phase-tabs .nav-link {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255,255,255,0.7);
   font-weight: 600;
   border-radius: 999px;
   padding: 0.45rem 0.9rem;
@@ -248,21 +225,19 @@ select.form-select:hover {
   color: #06171e;
 }
 
-/* Optional: underline animation for active tab */
 .phase-tabs .nav-link::after {
-  content: '';
-  display: block;
-  height: 2px;
-  width: 0%;
-  background: #f3c66b;
+  content:'';
+  display:block;
+  height:2px;
+  width:0%;
+  background:#f3c66b;
   transition: width 0.3s ease;
-  margin-top: 2px;
+  margin-top:2px;
 }
 
 .phase-tabs .nav-link.active::after {
-  width: 100%;
+  width:100%;
 }
-
 
 /* ============================
    FOOTER
@@ -275,18 +250,14 @@ footer {
   margin-top: 2.5rem;
 }
 
-
 /* ============================
-   MICRO UX POLISH
+   MICRO UX
 ============================ */
 
-input,
-select,
-button {
+input, select, button {
   transition: all 0.15s ease-in-out;
 }
 
-input:focus,
-select:focus {
+input:focus, select:focus {
   outline: none;
 }
