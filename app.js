@@ -100,25 +100,34 @@ function renderBlock(block, btn) {
     card.innerHTML = `
       <p class="fw-semibold">Day ${dayNum} — ${day.title}</p>
 
-      ${day.lifts.map(l => `
-        <div class="lift-row">
-          <input type="checkbox"
-            ${localStorage.getItem(key(block,dayNum,l))==="done"?"checked":""}
-            onchange="localStorage.setItem('${key(block,dayNum,l)}',this.checked?'done':'')">
-          <span>${l}</span>
-          <input type="number" class="form-control form-control-sm"
-            placeholder="lbs"
-            value="${localStorage.getItem(key(block,dayNum,l+"-w"))||""}"
-            oninput="localStorage.setItem('${key(block,dayNum,l+"-w")}',this.value)">
-        </div>
-      `).join("")}
+      day.lifts.map(lift => `
+  <div class="lift-row" id="lift-${block}-${dayNum}-${lift}">
+    <input type="checkbox"
+      ${localStorage.getItem(key(block, dayNum, lift)) === "done" ? "checked" : ""}
+      onchange="
+        const row = document.getElementById('lift-${block}-${dayNum}-${lift}');
+        row.classList.toggle('completed', this.checked);
+        localStorage.setItem('${key(block, dayNum, lift)}', this.checked ? 'done' : '');
+      ">
+    <span>${lift}</span>
+    <input type="number"
+      class="form-control form-control-sm"
+      placeholder='lbs'
+      value="${localStorage.getItem(key(block, dayNum, lift + '-w')) || ''}"
+      oninput="localStorage.setItem('${key(block, dayNum, lift + '-w')}', this.value)">
+  </div>
+`).join("")
 
-      <div class="lift-row mt-2">
-        <input type="checkbox"
-          ${localStorage.getItem(key(block,dayNum,"StairClimber"))==="done"?"checked":""}
-          onchange="localStorage.setItem('${key(block,dayNum,"StairClimber")}',this.checked?'done':'')">
-        <span>StairClimber — 30 min steady</span>
-      </div>
+      <div class="lift-row mt-2" id="lift-${block}-${dayNum}-StairClimber">
+  <input type="checkbox"
+    ${localStorage.getItem(key(block, dayNum, "StairClimber")) === "done" ? "checked" : ""}
+    onchange="
+      const row = document.getElementById('lift-${block}-${dayNum}-StairClimber');
+      row.classList.toggle('completed', this.checked);
+      localStorage.setItem('${key(block, dayNum, "StairClimber")}', this.checked ? 'done' : '');
+    ">
+  <span>StairClimber — 30 min steady</span>
+</div>
     `;
     phaseContent.appendChild(card);
   });
