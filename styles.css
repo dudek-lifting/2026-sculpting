@@ -162,7 +162,7 @@ body {
 .phase-tabs .nav-link.active {
   background: #f3c66b;
   color: #06171e;
-  padding: 0.35rem 0.5rem; /* slightly narrower */
+  padding: 0.35rem 0.45rem; /* slightly narrower horizontally */
 }
 
 /* ============================
