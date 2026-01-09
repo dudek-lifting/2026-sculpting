@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Agent Desktop – Yahoo! Account Recovery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --primary: #6001d2;
+      --primary-light: #efe6fb;
+      --accent: #f0162f;
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --danger: #e26c6c;
+      --danger-light: #fdeaea;
+      --radius: 10px;
+      --shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+    }
+    /* ... omitted for brevity (same CSS as before) ... */
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title">Agent Desktop — Yahoo! Account Recovery</div>
+    <div class="meta">Case {{case_id}} · Caller {{caller_id}}</div>
+  </header>
+  <!-- Theme source: https://www.yahoo.com | primary: #6001d2 | accent: #f0162f | confidence: medium -->
+  <div class="shell">
+    <div class="rail">
+      <button data-tab="context" class="active">360</button>
+      <button data-tab="workflow">Flow</button>
+      <button data-tab="script">Talk</button>
+      <button data-tab="journey">Path</button>
+      <button data-tab="systems">Data</button>
+      <button data-tab="wrapup">Done</button>
+    </div>
+    <div class="workspace">
+      <div class="tabs">
+        <button data-tab="context" class="active">Context</button>
+        <button data-tab="workflow">Workflow</button>
+        <button data-tab="script">Script</button>
+        <button data-tab="journey">Journey</button>
+        <button data-tab="systems">Systems</button>
+        <button data-tab="wrapup">Wrap-up</button>
+      </div>
+      <section id="context" class="panel active">
+        <div class="card">
+          <div class="grid">
+            <div class="field"><label>Account ID</label><div class="value">{{account_id}}</div></div>
+            <div class="field"><label>Email Address</label><div class="value">{{email_address}}</div></div>
+            <div class="field"><label>Account Status</label><div class="value">Locked</div></div>
+            <div class="field"><label>Lock Reason</label><div class="value">Suspicious sign-in detected</div></div>
+            <div class="field"><label>Caller Name</label><div class="value">{{caller_name}}</div></div>
+            <div class="field"><label>Verification Status</label><div class="value">Pending</div></div>
+            <div class="field"><label>Recovery Email</label><div class="value">{{recovery_email}}</div></div>
+            <div class="field"><label>Recovery Phone</label><div class="value">{{recovery_phone}}</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <label>Agent Notes</label>
+          <textarea rows="3" placeholder="Freeform notes…"></textarea>
+        </div>
+      </section>
+      <section id="workflow" class="panel">
+        <div class="card checklist">
+          <label><input type="checkbox"> Greet caller and confirm issue</label>
+          <label><input type="checkbox"> Complete identity verification</label>
+          <label><input type="checkbox"> Review lock reason</label>
+          <label><input type="checkbox"> Initiate account restore</label>
+          <label><input type="checkbox"> Confirm access restored</label>
+        </div>
+        <div class="card">
+          <strong>Actions</strong>
+          <div class="actions">
+            <button class="btn primary" onclick="toast('Verification passed')">Verify Identity</button>
+            <button class="btn ghost" onclick="toast('Reset link sent')">Send Reset Link</button>
+            <button class="btn primary" onclick="toast('Account unlocked')">Restore Account</button>
+            <button class="btn danger" onclick="toast('Supervisor notified')">Escalate</button>
+          </div>
+        </div>
+      </section>
+      <section id="script" class="panel script">
+        <div class="card">
+          <p class="agent"><span class="label">Greeting:</span> Thank you for calling Yahoo! support. My name is {{agent_name}}. How can I help you today?</p>
+          <p class="customer"><span class="label">Customer:</span> I’m locked out of my email account.</p>
+          <p class="agent"><span class="label">Verification:</span> I can help with that. For security, I’ll need to verify your account.</p>
+          <details>
+            <summary>Verification fails</summary>
+            <p class="agent"><span class="label">Agent:</span> I’m not able to verify the information provided. Let’s try an alternate recovery method.</p>
+          </details>
+          <p class="agent"><span class="label">Resolution:</span> I see the account was locked due to a suspicious sign-in. I’m restoring access now.</p>
+          <details>
+            <summary>Customer objection</summary>
+            <p class="customer"><span class="label">Customer:</span> I’m worried my data was compromised.</p>
+            <p class="agent"><span class="label">Agent:</span> I understand. I’ll walk you through updating your password and security settings.</p>
+          </details>
+          <p class="agent"><span class="label">Wrap-up:</span> Your account access is restored. Please sign in and confirm everything looks good.</p>
+        </div>
+      </section>
+      <section id="journey" class="panel">
+        <div class="card timeline">
+          <div class="event"><div class="date">Today · Phone</div>Account lock reported</div>
+          <div class="event"><div class="date">Yesterday · Web</div>Failed sign-in attempt</div>
+          <div class="event"><div class="date">3 days ago · Web</div>Password change</div>
+          <div class="event"><div class="date">Last week · Email</div>Security alert sent</div>
+        </div>
+      </section>
+      <section id="systems" class="panel">
+        <div class="card">
+          <table>
+            <thead>
+              <tr><th>System</th><th>Status</th><th>Last Updated</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Account Service</td><td>Locked</td><td>{{timestamp}}</td></tr>
+              <tr><td>Security Monitor</td><td>Alerted</td><td>{{timestamp}}</td></tr>
+              <tr><td>Email Access</td><td>Disabled</td><td>{{timestamp}}</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section id="wrapup" class="panel">
+        <div class="card checklist">
+          <label><input type="checkbox"> Confirm access with customer</label>
+          <label><input type="checkbox"> Advise password reset</label>
+          <label><input type="checkbox"> Review security tips</label>
+        </div>
+        <div class="card">
+          <label>Disposition</label>
+          <select>
+            <option>Account Restored</option>
+            <option>Escalated</option>
+            <option>Unable to Verify</option>
+          </select>
+        </div>
+        <div class="card">
+          <label>Interaction Summary</label>
+          <textarea rows="4" placeholder="Manual summary for CRM…"></textarea>
+        </div>
+        <div class="card">
+          <em>To verify: brand color accuracy and exact lock reason taxonomy.</em>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script>
+    const buttons = document.querySelectorAll('[data-tab]');
+    const panels = document.querySelectorAll('.panel');
+    function activate(tab){
+      buttons.forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+      panels.forEach(p=>p.classList.toggle('active',p.id===tab));
+    }
+    buttons.forEach(b=>b.addEventListener('click',()=>activate(b.dataset.tab)));
+    function toast(msg){
+      const t=document.getElementById('toast');
+      t.textContent=msg;
+      t.classList.add('show');
+      setTimeout(()=>t.classList.remove('show'),1800);
+    }
+  </script>
+</body>
+</html>
