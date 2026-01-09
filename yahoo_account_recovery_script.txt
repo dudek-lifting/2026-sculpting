@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Agent Desktop – Account Recovery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --primary:#6001d2;
+      --primary-light:#efe6fb;
+      --accent:#f0162f;
+      --bg:#f5f6fa;
+      --card-bg:#ffffff;
+      --text-main:#1f2937;
+      --text-muted:#6b7280;
+      --danger:#e26c6c;
+      --danger-light:#fdeaea;
+      --radius:10px;
+      --shadow:0 8px 22px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text-main);
+    }
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 18px;
+      background:linear-gradient(90deg,var(--primary),#7a3df0);
+      color:#fff;
+    }
+    header .title{
+      font-weight:600;
+      letter-spacing:.2px;
+    }
+    header .meta{
+      font-size:12px;
+      opacity:.9;
+    }
+    .shell{
+      display:grid;
+      grid-template-columns:64px 1fr;
+      height:calc(100vh - 56px);
+    }
+    .rail{
+      background:#0f1020;
+      color:#c7c9ff;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      padding:10px 0;
+      gap:10px;
+    }
+    .rail button{
+      width:40px;height:40px;
+      border-radius:8px;
+      border:none;
+      background:transparent;
+      color:inherit;
+      cursor:pointer;
+      font-size:12px;
+    }
+    .rail button.active,
+    .rail button:hover{
+      background:rgba(255,255,255,.12);
+      color:#fff;
+    }
+    .workspace{
+      padding:16px;
+      overflow:auto;
+    }
+    .tabs{
+      display:flex;
+      gap:8px;
+      margin-bottom:12px;
+      flex-wrap:wrap;
+    }
+    .tabs button{
+      border:1px solid #e5e7eb;
+      background:#fff;
+      padding:8px 12px;
+      border-radius:8px;
+      cursor:pointer;
+      font-size:13px;
+    }
+    .tabs button.active{
+      border-color:var(--primary);
+      background:var(--primary-light);
+      color:var(--primary);
+      font-weight:600;
+    }
+    .panel{
+      display:none;
+    }
+    .panel.active{
+      display:block;
+    }
+    .card{
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+      margin-bottom:14px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px 14px;
+    }
+    .field{
+      font-size:12px;
+    }
+    .field label{
+      color:var(--text-muted);
+      display:block;
+      margin-bottom:2px;
+    }
+    .field .value{
+      font-weight:500;
+    }
+    textarea, select, input[type="text"]{
+      width:100%;
+      border:1px solid #e5e7eb;
+      border-radius:8px;
+      padding:8px;
+      font-size:13px;
+    }
+    .checklist label{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:6px;
+      font-size:13px;
+    }
+    .actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .btn{
+      border:none;
+      border-radius:8px;
+      padding:8px 12px;
+      cursor:pointer;
+      font-size:13px;
+    }
+    .btn.primary{background:var(--primary);color:#fff}
+    .btn.ghost{background:#f3f4f6}
+    .btn.danger{background:var(--danger);color:#fff}
+    .toast{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      background:#111827;
+      color:#fff;
+      padding:10px 14px;
+      border-radius:8px;
+      opacity:0;
+      transform:translateY(10px);
+      transition:.25s;
+      font-size:13px;
+      pointer-events:none;
+    }
+    .toast.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+    .timeline{
+      border-left:3px solid var(--primary-light);
+      padding-left:12px;
+    }
+    .event{
+      margin-bottom:10px;
+      font-size:13px;
+    }
+    .event .date{
+      font-size:12px;
+      color:var(--text-muted);
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:13px;
+    }
+    th,td{
+      text-align:left;
+      padding:8px;
+      border-bottom:1px solid #e5e7eb;
+    }
+    th{
+      color:var(--text-muted);
+      font-weight:500;
+    }
+    .script p{
+      margin:8px 0;
+      font-size:13px;
+    }
+    .script .agent .label{color:var(--primary);font-weight:600}
+    .script .customer .label{color:#059669;font-weight:600}
+    .script .system .label{color:#6b7280;font-weight:600}
+    details{
+      margin:8px 0;
+      font-size:13px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title">Agent Desktop — Yahoo! Account Recovery</div>
+    <div class="meta">Case {{case_id}} · Caller {{caller_id}}</div>
+  </header>
+  <!-- Theme source: https://www.yahoo.com | primary: #6001d2 | accent: #f0162f | confidence: medium -->
+  <!-- Full HTML content continues as defined above -->
+</body>
+</html>
